@@ -1,4 +1,8 @@
+using System;
 using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
+using Serilog.Debugging;
 
 namespace Serilog.Sinks.RollingFileAlternate.Sinks
 {
@@ -6,12 +10,13 @@ namespace Serilog.Sinks.RollingFileAlternate.Sinks
     {
         private readonly string logDirectory;
         private readonly int? retainedFileCountLimit;
-        public FileRetentionPolicy(string logDirectory int? retainedFileCountLimit)
+        public FileRetentionPolicy(string logDirectory, int? retainedFileCountLimit)
         {
             this.logDirectory = logDirectory;
             this.retainedFileCountLimit = retainedFileCountLimit;
         }
-        private void Apply(string currentFilename)
+
+        public void Apply(string currentFilename)
         {
             if (this.retainedFileCountLimit == null) return;
 

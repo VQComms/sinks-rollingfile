@@ -28,7 +28,7 @@ namespace Serilog.Sinks.RollingFileAlternate.Sinks.SizeRollingFileSink
         private bool disposed;
         private readonly string logDirectory;
         private readonly string logFilePrefix;
-        private readonly FileRetentionPolicy fileRetentionPolicy;
+        private readonly FileRetentionPolicy retentionPolicy;
 
         /// <summary>
         /// Construct a <see cref="AlternateRollingFileSink"/>
@@ -54,7 +54,7 @@ namespace Serilog.Sinks.RollingFileAlternate.Sinks.SizeRollingFileSink
             this.logDirectory = logDirectory;
             this.logFilePrefix = string.IsNullOrEmpty(logFilePrefix) ? logFilePrefix : $"{logFilePrefix}-";
             this.currentSink = GetLatestSink();
-            this.retentionPolicy = new FileRetensionPolicy(this.logDirectory, retainedFileCountLimit);
+            this.retentionPolicy = new FileRetentionPolicy(this.logDirectory, retainedFileCountLimit);
         }
 
         internal SizeLimitedLogFileDescription CurrentLogFile { get { return this.currentSink.LogFileDescription; } }
