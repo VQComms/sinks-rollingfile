@@ -108,15 +108,9 @@ namespace Serilog.Sinks.RollingFileAlternate.Sinks.SizeRollingFileSink
             }
         }
 
-        internal bool SizeLimitReached { get { return this.sizeLimitReached; } }
+        internal bool SizeLimitReached => this.sizeLimitReached;
 
-        internal SizeLimitedLogFileDescription LogFileDescription
-        {
-            get
-            {
-                return this.sizeLimitedLogFileDescription;
-            }
-        }
+        internal SizeLimitedLogFileDescription LogFileDescription => this.sizeLimitedLogFileDescription;
 
         public void Dispose()
         {

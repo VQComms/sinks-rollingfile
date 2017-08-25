@@ -21,7 +21,7 @@ namespace Serilog.Sinks.RollingFileAlternate.Sinks
             if (this.retainedFileCountLimit == null) return;
 
             var filename = currentFilename.Substring(0, currentFilename.LastIndexOf("-"));
-            var regex = new Regex($"(/[0-9a-fA-F]*)+/{filename}-[0-9]{{5}}.log");
+            var regex = new Regex($"/.*/{filename}-[0-9]{{5}}.log");
 
             var newestFirst = Directory.GetFiles(this.logDirectory)
                 .Where(f => regex.IsMatch(f))

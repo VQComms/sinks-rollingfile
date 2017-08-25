@@ -22,7 +22,7 @@
                     sizeRollingSink.Emit(logEvent);
                     sizeRollingSink.Emit(logEvent);
 
-                    Assert.Equal<uint>(sizeRollingSink.CurrentLogFile.LogFileInfo.Sequence, 5);
+                    Assert.Equal<uint>(5, sizeRollingSink.CurrentLogFile.LogFileInfo.Sequence);
                     Assert.Equal(4, Directory.GetFiles(dir.LogDirectory).Length);
                 }
             }
@@ -50,7 +50,7 @@
                     
                     var files = Directory.GetFiles(dir.LogDirectory);
                     
-                    Assert.Equal<uint>(sizeRollingSink.CurrentLogFile.LogFileInfo.Sequence, 5);
+                    Assert.Equal<uint>(5, sizeRollingSink.CurrentLogFile.LogFileInfo.Sequence);
                     Assert.Contains(files, x => x.Substring(x.LastIndexOf("/") +1).StartsWith("Ignore"));
                     Assert.Equal(5, files.Length);
                 }
@@ -79,7 +79,7 @@
                     
                     var files = Directory.GetFiles(dir.LogDirectory);
                     
-                    Assert.Equal<uint>(sizeRollingSink.CurrentLogFile.LogFileInfo.Sequence, 5);
+                    Assert.Equal<uint>(5, sizeRollingSink.CurrentLogFile.LogFileInfo.Sequence);
                     Assert.Contains(files, x => x.Substring(x.LastIndexOf("/") +1).StartsWith("Ignore"));
                     Assert.Equal(5, files.Length);
                 }

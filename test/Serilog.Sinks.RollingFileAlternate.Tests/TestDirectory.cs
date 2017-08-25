@@ -22,7 +22,7 @@
             this.folder = di.FullName;
         }
 
-        public string LogDirectory { get { return this.folder; } }
+        public string LogDirectory => this.folder;
 
         public void CreateLogFile(DateTime date, uint sequence)
         {

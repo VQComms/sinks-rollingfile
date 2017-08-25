@@ -1,39 +1,15 @@
 #!/bin/bash
-echo ""
-echo "Installing dotnet cli..."
-echo ""
 
-tools/install.sh
-
-origPath=$PATH
-export PATH="./dotnet/bin/:$PATH"
-
-if [ $? -ne 0 ]; then
-  echo >&2 ".NET Execution Environment installation has failed."
-  exit 1
+if [ $# -eq 0 ]
+  then
+    echo "No version number supplied"
+    exit 0
 fi
 
-export DOTNET_HOME="$DOTNET_INSTALL_DIR/cli"
-export PATH="$DOTNET_HOME/bin:$PATH"
+dotnet restore serilog-sinks-rollingfile.sln
 
-# Restore packages and build product
-dotnet restore -v Minimal # Restore all packages
+dotnet build --configuration Release serilog-sinks-rollingfile.sln
 
-# Build all
-# Note the exclude: https://github.com/dotnet/cli/issues/1342
-for d in src/*; do 
-	echo "Building $d"
-	pushd "$d"
-	dotnet build
-	popd
-done
+dotnet test ./test/Serilog.Sinks.RollingFileAlternate.Tests/Serilog.Sinks.RollingFileAlternate.Tests.csproj
 
-# Run tests
-for d in test/*; do 
-    echo "Testing $d"
-    pushd "$d"
-    dotnet test
-    popd
-done
-
-export PATH=$origPath
+dotnet pack ./src/Serilog.Sinks.RollingFileAlternate/Serilog.Sinks.RollingFileAlternate.csproj --configuration Release --output ../../artifacts /p:PackageVersion=$1
